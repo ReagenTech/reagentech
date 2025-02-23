@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"> 
+  <script src="script.js"></script>
  <head> 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>ReagenTech - Pre-Sale Demand Collection</title> 
+  <title>ReagenTech Diagnostics</title> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
   <style>
         body {
@@ -15,137 +16,187 @@
             color: #fff;
             overflow-x: hidden;
         }
-        /* Navbar Genel Stil */
+        
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #1a1a1a;
-    padding: 1rem 2rem;
-    color: white;
+    background-color: black;
+    padding: 15px 20px;
     position: fixed;
-    width: 100%;
     top: 0;
-    left: 0;
+    width: 100%;
     z-index: 1000;
 }
 
-/* CSS ile Modern Logo */
+/* Logo */
 .logo {
-    font-size: 2.2rem;
+    font-size: 24px;
     font-weight: bold;
-    font-family: 'Poppins', sans-serif;
+}
+
+/* Normal Menü Linkleri (Sadece Masaüstünde Görünecek) */
+.menu-links {
     display: flex;
-    align-items: center;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
 }
 
-/* Kırmızı ve Beyaz Efekt */
-.logo-red {
-    color: #ff1e1e;
-    font-weight: 700;
-    position: relative;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-/* Beyaz ve Minimal Efekt */
-.logo-white {
+.menu-links a {
     color: white;
-    font-weight: 300;
-    margin-left: 5px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
 }
 
-/* Hover Efekti */
-.logo:hover .logo-red {
-    color: #ff6600;
-    transform: translateY(-2px);
+/* Menü Butonu (Sadece Mobilde Gözükecek) */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    display: none; /* Masaüstünde gizli */
 }
 
-.logo:hover .logo-white {
-    color: #ffcc00;
-    transform: translateY(2px);
+/* Mobil Menü */
+.menu {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Başlangıçta gizli */
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: right 0.3s ease-in-out;
+    z-index: 1001;
 }
 
 /* Menü Linkleri */
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-links li {
-    display: inline;
-}
-
-.nav-links a {
-    text-decoration: none;
+.menu a {
     color: white;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: color 0.3s ease-in-out;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
 }
 
-.nav-links a:hover {
-    color: #ff1e1e;
+/* Menü Açılınca */
+.menu.show {
+    right: 0;
 }
 
-/* Mobil Menü (Hamburger Icon) */
-.menu-toggle {
-    display: none;
-    font-size: 2rem;
+/* Kapat Butonu */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
     cursor: pointer;
 }
 
-/* Responsive Tasarım */
+/* Mobil Menü Açılınca Arka Plan Overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Hafif karartılmış arka plan */
+    display: none; /* Başlangıçta gizli */
+    z-index: 1000;
+}
+
+/* Menü Açılınca Overlay Göster */
+.menu.show + .menu-overlay {
+    display: block;
+}
+
+/* Mobilde Menü Butonu ve Linkler */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        background: #1a1a1a;
-        width: 100%;
-        top: 60px;
-        left: 0;
-        padding: 1rem;
+    .menu-links {
+        display: none; /* Masaüstü linklerini gizle */
     }
-
-    .nav-links li {
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    .menu-toggle {
-        display: block;
+    .menu-btn {
+        display: block; /* Mobilde buton göster */
     }
 }
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 115vh;
-            text-align: center;
-            background: url('') no-repeat center center/cover;
-            padding: 40px;
-        }
-        .hero h1 {
-            font-size: 60px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
-        }
-        .hero h2 {
-          font-size:  35px;
-          margin-bottom: 12px;
-          align-items: center;
-        }
-        .hero p {
-            font-size: 24px;
-            max-width: 900px;
-        }
+      /* Hero Bölümü */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60vh; /* Daha estetik bir yükseklik */
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjtkqM45s8ld1dtZxq8oyMOPsq5YqQeDxoUQ&usqp=CAU') no-repeat center center/cover;
+    color: white;
+    padding: 20px;
+}
+
+/* Saydam Katman */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Hafif siyah saydamlık */
+}
+
+/* Hero İçeriği */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* Buton Tasarımı */
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: #ff3e6c;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #ff1a4d;
+}
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ff3e6c;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #ff1a4d;
+}
         .btn {
             background: #FF3131;
             color: white;
@@ -378,36 +429,49 @@
 }
 .tugrul {
     color: white; /* Instagram için canlı pembe renk */
-    text-decoration: none;
+    text-decoration: none ;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .tugrul:hover {
-    color: orange; /* Hover olduğunda koyulaşan pembe */
+    color: #ff1e1e; /* Hover olduğunda koyulaşan pembe */
 }
     </style> 
  </head> 
  <body> 
   <header>
-    <nav class="navbar">
-        <div class="logo">
-            <span class="logo-red">Reagen</span><span class="logo-white">Tech</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="menu-toggle">&#9776;</div> <!-- Mobil Menü İkonu -->
-    </nav>
+  
+<nav class="navbar">
+    <div class="logo"> 
+        <span style="color: red;">REAGEN</span><span style="color: white;">TECH</span>
+    </div>
+    <div class="menu-links">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="menu" id="menu">
+        <button class="close-btn" onclick="closeMenu()">✖</button>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+</nav>
 </header>
     
-  <section class="hero"> 
-   <h1>Innovative Biochemical Solutions</h1> 
-   <p>High-quality reagents for scientific excellence, trusted worldwide.</p> <button class="btn">Discover More</button> 
-  </section> 
+  <section class="hero">
+    <div class="overlay"></div> <!-- Saydam katman -->
+    <div class="hero-content">
+        <h1>Innovative Biochemical Solutions</h1>
+        <p>High-quality reagents for scientific excellence, trusted worldwide.</p>
+        <a href="#products" class="btn">Discover More</a>
+    </div>
+</section>
 <section id="blood-analysis" class="blood-analysis-section">
     <h2><i class="fas fa-vial-circle-check"></i> Advanced Blood Analysis Kits & Autoanalyzers</h2>
     
@@ -470,5 +534,19 @@
     <p class="footer-copyright">© 2025 ReagenTech. All Rights Reserved.  <a href="https://www.instagram.com/tugrul.ondes" target="_blank" class="tugrul" >Made By Tuğrul Öndeş</a></p> 
    </div> 
   </footer> 
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+    document.getElementById("menuOverlay").style.display = "block";
+}
+
+function closeMenu() {
+    document.getElementById("menu").classList.remove("show");
+    document.getElementById("menuOverlay").style.display = "none";
+}
+</script>
+
  </body>
-  </html>
+ 
+
+</html>
